@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulador Caja Detective</title>
+<style>
+  :root { --bg:#1d1f27; --caja:#7a4b24; --caja2:#5e3817; --panel:#2b2d38; --txt:#eee; --mut:#9aa; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--txt); font-family:system-ui,sans-serif;
+         display:flex; flex-wrap:wrap; gap:24px; justify-content:center; padding:24px 16px; }
+  h1 { font-size:18px; margin:0 0 12px; width:100%; text-align:center; }
+  .caja { background:linear-gradient(var(--caja),var(--caja2)); border-radius:16px; padding:22px;
+          width:340px; box-shadow:0 10px 30px #0008; position:relative; }
+  .tapa { background:#0003; border-radius:10px; padding:12px; margin-bottom:16px;
+          display:flex; align-items:center; justify-content:space-between; }
+  .leds { display:flex; gap:8px; }
+  .led { width:18px; height:18px; border-radius:50%; background:#222; border:2px solid #000a; transition:.08s; }
+  .led.prog.on { background:#ffd23f; box-shadow:0 0 10px #ffd23f; }
+  .led.rojo.on { background:#ff3b3b; box-shadow:0 0 12px #ff3b3b; }
+  .led.verde.on { background:#3bff6a; box-shadow:0 0 12px #3bff6a; }
+  .estado { display:flex; gap:14px; justify-content:center; margin-bottom:16px; }
+  .cerrojo { background:#0003; border-radius:10px; padding:10px; margin-bottom:16px; text-align:center; font-size:13px; }
+  .barra { height:14px; width:120px; margin:6px auto 0; background:#222; border-radius:7px; position:relative; }
+  .pestillo { position:absolute; top:0; left:0; width:50px; height:14px; background:#bbb; border-radius:7px;
+              transition:left .6s; }
+  .abierto .pestillo { left:70px; background:#4f4; }
+  .grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:12px; }
+  button.b { border:0; border-radius:10px; padding:16px 0; font-size:20px; font-weight:700; cursor:pointer;
+             background:#e8e1d5; color:#222; box-shadow:0 4px 0 #0006; user-select:none; }
+  button.b:active, button.b.down { transform:translateY(3px); box-shadow:0 1px 0 #0006; }
+  .fila { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .enviar { background:#7fd18b !important; } .borrar { background:#e88a8a !important; }
+  .maestro { position:absolute; right:8px; bottom:8px; width:26px; height:26px; border-radius:50%;
+             background:#5e3817; border:1px solid #0005; cursor:pointer; padding:0; opacity:.55; }
+  .maestro::after { content:""; position:absolute; left:-1px; top:-1px; width:26px; height:26px; border-radius:50%;
+                    background:conic-gradient(#fff var(--p,0%), transparent 0); opacity:.5; }
+  .lado { background:var(--panel); border-radius:12px; padding:16px; width:360px; max-width:100%; }
+  .lado h2 { font-size:14px; margin:0 0 8px; color:var(--mut); text-transform:uppercase; letter-spacing:.05em; }
+  #consola { height:230px; overflow:auto; font:12px/1.5 ui-monospace,monospace; background:#15161c;
+             padding:8px; border-radius:8px; }
+  #consola div { border-bottom:1px solid #fff1; }
+  .info { font-size:12px; color:var(--mut); line-height:1.6; margin-top:12px; }
+  .info code { color:#ffd23f; }
+  .tools { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+  .tools button { background:#3a3d4c; color:var(--txt); border:0; border-radius:6px; padding:6px 10px; cursor:pointer; font-size:12px; }
+  .tools button:hover { background:#4a4e62; }
+  #resultados { font-size:12px; margin-top:8px; }
+  .ok { color:#6f6; } .fa { color:#f66; }
+
+  .casos { background:var(--panel); border-radius:12px; padding:16px; width:100%; max-width:760px; }
+  .casos h2 { font-size:14px; margin:0 0 8px; color:var(--mut); text-transform:uppercase; letter-spacing:.05em; }
+  .nav { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:10px; }
+  .nav button { background:#3a3d4c; color:var(--txt); border:0; border-radius:6px; padding:8px 14px; cursor:pointer; font-size:14px; }
+  .nav button:hover { background:#4a4e62; }
+  #casoTitulo { font-weight:700; text-align:center; flex:1; }
+  #historia { background:#f4ecd8; color:#2b2318; border-radius:10px; padding:16px 18px; line-height:1.65; font-size:15px; margin-bottom:12px; }
+  .preg { margin-bottom:10px; }
+  .preg > b { display:block; font-size:14px; margin-bottom:4px; }
+  .ops { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+  .op { background:#3a3d4c; border-radius:6px; padding:6px 10px; font-size:13px; cursor:pointer; border:2px solid transparent; }
+  .op:hover { background:#4a4e62; }
+  .op.sel { border-color:#ffd23f; }
+  .op.sol { border-color:#6f6; background:#2f5a38; }
+  @media (max-width:560px) { .ops { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<h1>Simulador de la Caja Detective</h1>
+
+<div class="caja" id="caja">
+  <div class="tapa">
+    <span style="font-size:12px">Progreso</span>
+    <div class="leds" id="ledsProg"></div>
+  </div>
+  <div class="estado">
+    <div style="text-align:center;font-size:11px">ROJO<br><div class="led rojo" id="ledRojo" style="margin:4px auto"></div></div>
+    <div style="text-align:center;font-size:11px">VERDE<br><div class="led verde" id="ledVerde" style="margin:4px auto"></div></div>
+  </div>
+  <div class="cerrojo" id="cerrojo">Cerrojo: <b id="txtCerrojo">cerrado</b>
+    <div class="barra"><div class="pestillo"></div></div>
+  </div>
+  <div class="grid">
+    <button class="b" data-k="a">A</button><button class="b" data-k="b">B</button>
+    <button class="b" data-k="c">C</button><button class="b" data-k="d">D</button>
+  </div>
+  <div class="fila">
+    <button class="b borrar" data-k="x">BORRAR</button>
+    <button class="b enviar" data-k="e">ENVIAR</button>
+  </div>
+  <button class="maestro" id="btnMaestro" title="Botón MAESTRO escondido: mantén 2 s"></button>
+</div>
+
+<div class="lado">
+  <h2>Consola (sonidos y mensajes)</h2>
+  <div id="consola"></div>
+  <div class="info">
+    Teclado: <code>a b c d</code> respuestas · <code>e</code> ENVIAR · <code>x</code> BORRAR ·
+    <code>m</code> (mantener 2 s) MAESTRO.<br>
+    Botón MAESTRO: el círculo discreto abajo a la derecha de la caja; mantenlo 2 s.<br>
+    Clave de fábrica <code>B-A-D-C-A</code> · PIN maestro <code>D-C-B-A</code> ·
+    3 fallos = bloqueo 30 s · la clave nueva se guarda en el navegador (como la EEPROM).
+  </div>
+  <div class="tools">
+    <button id="rPilas">Quitar y poner pilas</button>
+    <button id="rMemoria">Borrar memoria (EEPROM)</button>
+    <button id="rPruebas">Correr pruebas automáticas</button>
+    <label style="font-size:12px"><input type="checkbox" id="chkSonido" checked> sonido</label>
+  </div>
+  <div id="resultados"></div>
+</div>
+
+
+<div class="casos">
+  <h2>Casos: lee la historia y responde en la caja</h2>
+  <div class="nav">
+    <button id="prevCaso">◀</button><div id="casoTitulo"></div><button id="sigCaso">▶</button>
+  </div>
+  <div id="historia"></div>
+  <div id="preguntas"></div>
+  <div class="tools">
+    <button id="verSol">Mostrar / ocultar respuestas</button>
+    <button id="limpiarSel">Limpiar selección</button>
+  </div>
+  <div class="info">Al hacer clic en una opción se presiona ese botón en la caja. Después de la 5.ª pregunta, presiona ENVIAR.</div>
+</div>
+
+<script>
+// ---------- Mismos ajustes que el Arduino ----------
+const LARGO = 5, MAX_FALLOS = 3, BLOQUEO_MS = 30000, ESPERA_MAESTRO_MS = 30000, PRESION_MS = 2000, MUESTRA_MS = 3000;
+const PIN_MAESTRO = [3,2,1,0];
+const CLAVE_FABRICA = [1,0,3,2,0];
+const USAR_CASOS = true;
+const CASOS = [[2,2,0,1,3],[0,3,1,1,2],[3,1,2,0,0],[1,3,3,0,2],[2,0,1,3,1],[0,1,2,3,2]];
+const LETRAS = "ABCD";
+const MEM_KEY = "caja_detective_eeprom";
+const txt = c => c.map(i => LETRAS[i]).join("-");
+const iguales = (a,b) => a.length === b.length && a.every((v,i) => v === b[i]);
+const coinc = (a,b) => a.reduce((n,v,i) => n + (v === b[i] ? 1 : 0), 0);
+
+// ---------- Memoria (EEPROM simulada con localStorage) ----------
+const memoria = {
+  leer() { try { const v = JSON.parse(localStorage.getItem(MEM_KEY)); return Array.isArray(v) && v.length === LARGO ? v : null; } catch { return null; } },
+  guardar(c) { try { localStorage.setItem(MEM_KEY, JSON.stringify(c)); } catch {} },
+  borrar() { try { localStorage.removeItem(MEM_KEY); } catch {} }
+};
+
+// ---------- Lógica de la caja (sin DOM, para poder probarla) ----------
+class Caja {
+  constructor({ mem = memoria, ahora = () => performance.now(), salida = {} } = {}) {
+    this.mem = mem; this.ahora = ahora; this.out = salida;
+    this.clave = mem.leer() || [...CLAVE_FABRICA];
+    this.entrada = []; this.fallos = 0; this.abierta = false;
+    this.modo = "juego";          // juego | pin | nueva | confirma
+    this.buffer = []; this.nueva = [];
+    this.bloqueadaHasta = 0;      // bloqueo de 30 s
+    this.ocupadaHasta = 0;        // el Arduino se "congela" con delay() (p. ej. 3 s mostrando aciertos)
+    this.ultimaTecla = 0;
+    this.ledRojo = false; this.ledVerde = false; this.progreso = 0;
+    this._notificar();
+  }
+  _msg(m) { this.out.msg && this.out.msg(m); }
+  _snd(s) { this.out.sonido && this.out.sonido(s); }
+  _notificar() { this.out.render && this.out.render(this); }
+  bloqueada() { return this.ahora() < this.bloqueadaHasta; }
+  ocupada() { return this.ahora() < this.ocupadaHasta; }
+
+  // Revisa temporizadores (lo llama el reloj de la página o las pruebas)
+  tick() {
+    const t = this.ahora();
+    if (this.modo !== "juego" && t - this.ultimaTecla > ESPERA_MAESTRO_MS) this._salirMaestro(false, "tiempo agotado");
+    if (this._fin3s && t >= this._fin3s) { this._fin3s = 0; this.ledRojo = false; this._borrar(); }
+    if (this._finBloqueo && t >= this._finBloqueo) { this._finBloqueo = 0; this.ledRojo = false; this._borrar(); this._msg("Caja desbloqueada."); }
+    this._notificar();
+  }
+
+  presionar(k) {
+    k = k.toLowerCase();
+    this.tick();
+    if (this.ocupada() || this.bloqueada()) { this._msg("(la caja está ocupada/bloqueada: los botones no responden)"); this._notificar(); return; }
+    this.ultimaTecla = this.ahora();
+    if (this.modo !== "juego") this._teclaMaestro(k);
+    else if (this.abierta) { if (k === "e") this._cerrar(); }
+    else if ("abcd".includes(k) && k) {
+      if (this.entrada.length < LARGO) {
+        this.entrada.push("abcd".indexOf(k)); this.progreso = this.entrada.length; this._snd("bip");
+      }
+    }
+    else if (k === "x") this._borrar();
+    else if (k === "e") this._revisar();
+    this._notificar();
+  }
+
+  _borrar() { this.entrada = []; this.progreso = 0; }
+  _abrir() { this.abierta = true; this.ledVerde = true; this.ledRojo = false; this._snd("acierto"); this._msg("¡La caja se abrió!"); }
+  _cerrar() { this.abierta = false; this.ledVerde = false; this.fallos = 0; this._borrar(); this._msg("Cerrojo cerrado. Lista para el siguiente caso."); }
+
+  _revisar() {
+    if (this.entrada.length < LARGO) { this._snd("error"); this._msg("buuu (faltan respuestas)"); return; }
+    let mejor = coinc(this.entrada, this.clave);
+    if (mejor === LARGO) return this._abrir();
+    if (USAR_CASOS) for (const c of CASOS) {
+      const a = coinc(this.entrada, c);
+      if (a === LARGO) return this._abrir();
+      mejor = Math.max(mejor, a);
+    }
+    this.fallos++;
+    this.ledRojo = true; this.progreso = mejor; this._snd("error");
+    this._msg(`Acertaste ${mejor} de ${LARGO}. Vuelve a leer el caso.`);
+    this.entrada = [];
+    this.ocupadaHasta = this._fin3s = this.ahora() + MUESTRA_MS;   // 3 s mostrando aciertos
+    if (this.fallos >= MAX_FALLOS) {
+      this.fallos = 0;
+      this.bloqueadaHasta = this._finBloqueo = this.ahora() + MUESTRA_MS + BLOQUEO_MS;
+      this._msg(`Demasiados intentos: caja bloqueada ${BLOQUEO_MS/1000} s.`);
+    }
+  }
+
+  // ---------- Modo maestro ----------
+  entrarMaestro() {
+    this.tick();
+    if (this.ocupada() || this.bloqueada()) return;
+    this.modo = "pin"; this.buffer = []; this.progreso = 0;
+    this.ledRojo = this.ledVerde = true; this.ultimaTecla = this.ahora();
+    this._snd("maestro"); this._msg("MODO MAESTRO: teclea el PIN (4) y presiona ENVIAR");
+    this._notificar();
+  }
+  _salirMaestro(exito, motivo) {
+    this.modo = "juego"; this.buffer = []; this.nueva = []; this.fallos = 0; this._borrar();
+    this.ledRojo = false; this.ledVerde = this.abierta;
+    if (exito) { this._snd("acierto"); this._msg(`Contraseña guardada: ${txt(this.clave)}`); }
+    else { this._snd("error"); this._msg("No se cambió la contraseña" + (motivo ? ` (${motivo})` : "") + "."); }
+  }
+  _teclaMaestro(k) {
+    if ("abcd".includes(k) && k) { this.buffer.push("abcd".indexOf(k)); this.progreso = Math.min(this.buffer.length, 5); this._snd("bip"); }
+    else if (k === "x") { this.buffer = []; this.progreso = 0; }
+    else if (k === "e") {
+      const d = this.buffer; this.buffer = []; this.progreso = 0;
+      if (this.modo === "pin") {
+        if (iguales(d, PIN_MAESTRO)) { this.modo = "nueva"; this._snd("ok"); this._msg("PIN correcto: teclea la NUEVA contraseña y ENVIAR"); }
+        else this._salirMaestro(false, "PIN incorrecto");
+      } else if (this.modo === "nueva") {
+        if (d.length === LARGO) { this.nueva = d; this.modo = "confirma"; this._snd("ok"); this._msg("Teclea la contraseña OTRA VEZ para confirmar"); }
+        else this._salirMaestro(false, "debe tener 5 respuestas");
+      } else if (this.modo === "confirma") {
+        if (iguales(d, this.nueva)) { this.mem.guardar(d); this.clave = [...d]; this._salirMaestro(true); }
+        else this._salirMaestro(false, "no coinciden");
+      }
+    }
+  }
+}
+
+// ---------- Sonido (buzzer con WebAudio) ----------
+let audio = null;
+function tono(freq, dur, inicio = 0) {
+  if (!document.getElementById("chkSonido").checked) return;
+  audio = audio || new (window.AudioContext || window.webkitAudioContext)();
+  const o = audio.createOscillator(), g = audio.createGain(), t = audio.currentTime + inicio;
+  o.type = "square"; o.frequency.value = freq; g.gain.value = 0.05;
+  o.connect(g); g.connect(audio.destination); o.start(t); o.stop(t + dur);
+}
+const SONIDOS = {
+  bip: () => tono(1200, .06),
+  error: () => tono(220, .4),
+  ok: () => tono(1500, .2),
+  maestro: () => { tono(900, .12); tono(900, .12, .2); },
+  acierto: () => [523,659,784,1047].forEach((f,i) => tono(f, .15, i*.17))
+};
+
+// ---------- Interfaz ----------
+const $ = id => document.getElementById(id);
+const progEl = [...Array(5)].map(() => { const d = document.createElement("div"); d.className = "led prog"; $("ledsProg").append(d); return d; });
+function log(m) { const d = document.createElement("div"); d.textContent = m; $("consola").append(d); $("consola").scrollTop = 1e6; }
+
+let cajaUI;
+function nuevaCaja() {
+  cajaUI = new Caja({ salida: { msg: log, sonido: s => SONIDOS[s] && SONIDOS[s](), render: pintar } });
+}
+let parpadeo = false;
+function pintar(c) {
+  progEl.forEach((d,i) => d.classList.toggle("on", i < c.progreso));
+  const rojo = c.bloqueada() && !c.ocupada() ? parpadeo : c.ledRojo;   // en bloqueo el LED rojo parpadea
+  $("ledRojo").classList.toggle("on", rojo);
+  $("ledVerde").classList.toggle("on", c.ledVerde);
+  $("cerrojo").classList.toggle("abierto", c.abierta);
+  let t = c.abierta ? "ABIERTO" : "cerrado";
+  if (c.modo !== "juego") t += ` · MODO MAESTRO (${c.modo})`;
+  else if (c.bloqueada()) t += ` · BLOQUEADA ${Math.ceil((c.bloqueadaHasta - c.ahora())/1000)} s`;
+  $("txtCerrojo").textContent = t;
+}
+setInterval(() => { parpadeo = !parpadeo; cajaUI.tick(); }, 300);
+
+document.querySelectorAll("button.b").forEach(b => b.addEventListener("click", () => cajaUI.presionar(b.dataset.k)));
+const mapaTeclas = { a:"a", b:"b", c:"c", d:"d", e:"e", x:"x", enter:"e", backspace:"x" };
+let mTimer = null, mInicio = 0, mRaf = null;
+function maestroAbajo() {
+  if (mTimer) return;
+  mInicio = performance.now();
+  const paso = () => { $("btnMaestro").style.setProperty("--p", Math.min(100, (performance.now()-mInicio)/PRESION_MS*100) + "%"); mRaf = requestAnimationFrame(paso); };
+  paso();
+  mTimer = setTimeout(() => { cajaUI.entrarMaestro(); maestroArriba(); }, PRESION_MS);
+}
+function maestroArriba() { clearTimeout(mTimer); mTimer = null; cancelAnimationFrame(mRaf); $("btnMaestro").style.setProperty("--p", "0%"); }
+const bm = $("btnMaestro");
+["mousedown","touchstart"].forEach(e => bm.addEventListener(e, ev => { ev.preventDefault(); maestroAbajo(); }));
+["mouseup","mouseleave","touchend"].forEach(e => bm.addEventListener(e, maestroArriba));
+addEventListener("keydown", ev => {
+  if (ev.repeat) return;
+  const k = ev.key.toLowerCase();
+  if (k === "m") return maestroAbajo();
+  if (mapaTeclas[k]) { ev.preventDefault(); cajaUI.presionar(mapaTeclas[k]);
+    const btn = document.querySelector(`button.b[data-k="${mapaTeclas[k]}"]`); if (btn) { btn.classList.add("down"); setTimeout(() => btn.classList.remove("down"), 120); } }
+});
+addEventListener("keyup", ev => { if (ev.key.toLowerCase() === "m") maestroArriba(); });
+
+$("rPilas").onclick = () => { nuevaCaja(); log("— Caja reiniciada (pilas fuera y dentro) —"); };
+$("rMemoria").onclick = () => { memoria.borrar(); nuevaCaja(); log("— Memoria borrada: vuelve la clave de fábrica —"); };
+
+// ---------- Pruebas automáticas (las mismas del .py) ----------
+function pruebas() {
+  const res = []; const p = (n, ok) => res.push([n, !!ok]);
+  let t = 0; const reloj = () => t;
+  const mem = (inicial = null) => { let v = inicial; return { leer: () => v, guardar: c => { v = [...c]; }, borrar: () => { v = null; } }; };
+  const mk = (m = mem()) => new Caja({ mem: m, ahora: reloj });
+  const teclear = (c, s) => { for (const k of s.replace(/ /g, "")) c.presionar(k); };
+  const esperar = (c, ms) => { t += ms; c.tick(); };
+
+  let c = mk(); teclear(c, "badca e"); p("La clave de fábrica B-A-D-C-A abre la caja", c.abierta);
+  c = mk(); teclear(c, "ccabd e"); p("Un caso fijo (Caso 1: C-C-A-B-D) abre la caja", c.abierta);
+  c = mk(); teclear(c, "badcb e"); p("Una clave con 4 de 5 bien NO abre y muestra 4", !c.abierta && c.progreso === 4);
+  c = mk(); teclear(c, "bad e"); p("ENVIAR incompleto no cuenta como fallo", c.fallos === 0 && !c.abierta);
+  c = mk(); teclear(c, "bad x badca e"); p("BORRAR limpia lo tecleado", c.abierta);
+
+  c = mk(); teclear(c, "aaaaa e"); esperar(c, 3100); teclear(c, "aaaaa e"); esperar(c, 3100); teclear(c, "aaaaa e");
+  p("3 fallos bloquean la caja", c.bloqueada());
+  esperar(c, 3100); teclear(c, "badca e"); p("Bloqueada, ni la clave correcta abre", !c.abierta);
+  esperar(c, BLOQUEO_MS + 1000); teclear(c, "badca e"); p("Pasado el bloqueo, la clave abre", c.abierta);
+
+  c = mk(); teclear(c, "badca e e"); p("Con la caja abierta, ENVIAR la cierra", !c.abierta);
+
+  c = mk(); c.entrarMaestro(); teclear(c, "dcba e ddddd e ddddd e");
+  p("El maestro cambia la clave a D-D-D-D-D", iguales(c.clave, [3,3,3,3,3]));
+  teclear(c, "badca e"); p("La clave vieja ya no abre", !c.abierta);
+  esperar(c, 3100); teclear(c, "ddddd e"); p("La clave nueva sí abre", c.abierta);
+
+  c = mk(); c.entrarMaestro(); teclear(c, "aaaa e"); p("PIN incorrecto: no cambia y sale del modo maestro", iguales(c.clave, CLAVE_FABRICA) && c.modo === "juego");
+  c = mk(); c.entrarMaestro(); teclear(c, "dcba e ddddd e dddda e"); p("Confirmación distinta: no cambia", iguales(c.clave, CLAVE_FABRICA));
+  c = mk(); c.entrarMaestro(); teclear(c, "dcba e ddd e"); p("Clave nueva de <5 se rechaza", iguales(c.clave, CLAVE_FABRICA));
+  c = mk(); c.entrarMaestro(); esperar(c, ESPERA_MAESTRO_MS + 1); p("30 s sin teclas salen del modo maestro", c.modo === "juego");
+
+  const m = mem(); c = mk(m); c.entrarMaestro(); teclear(c, "dcba e abcda e abcda e");
+  const c2 = mk(m); p("La clave del maestro se conserva al reiniciar", iguales(c2.clave, [0,1,2,3,0]));
+
+  const bien = res.filter(r => r[1]).length;
+  $("resultados").innerHTML = res.map(([n, ok]) => `<div class="${ok ? "ok" : "fa"}">${ok ? "OK  " : "FALLA"} ${n}</div>`).join("") +
+    `<div style="margin-top:6px"><b>${bien} de ${res.length} pruebas pasaron.</b></div>`;
+}
+$("rPruebas").onclick = pruebas;
+
+
+// ---------- Casos: historias cuyas respuestas están implícitas ----------
+// Cada letra correcta coincide con CASOS[n] (la clave que acepta la caja).
+const HISTORIAS = [
+ { t:"Caso 1: El perro desaparecido",
+   h:"Ayer por la tarde, Luna, la perra de Sofía, desapareció del jardín. Sofía vio que la reja estaba abierta y en el piso había huellas de patas pequeñas y un pedazo de salchicha. Las huellas llevaban al parque. Cerca de la banca, el vendedor de globos dijo: «Vi una perrita café con un listón rojo comiendo salchicha. Corrió hacia la panadería». En la panadería, la dueña contó que la perrita se escondió debajo de una mesa porque le asustó la tormenta. Sofía la encontró ahí, mojada y temblando, y la abrazó.",
+   p:[["¿Cómo se llama la perra?",["Mocha","Nube","Luna","Canela"]],
+      ["¿Por dónde se escapó?",["Por la ventana","Por el techo","Por la reja abierta","Por la puerta de la casa"]],
+      ["¿Qué había en el piso, además de huellas?",["Un pedazo de salchicha","Un hueso","Un listón","Un globo"]],
+      ["¿Quién vio a la perrita en el parque?",["Un policía","El vendedor de globos","Una maestra","El panadero"]],
+      ["¿Dónde la encontró Sofía?",["En la banca del parque","En el jardín","Junto a la reja","En la panadería"]]] },
+ { t:"Caso 2: La nota misteriosa",
+   h:"Mateo encontró una nota doblada dentro de su mochila. Decía: «Búscame donde guardan los libros, en el tercer estante, junto al libro verde». La letra era cuadrada y estaba escrita con lápiz azul. Mateo pensó en sus compañeros: Ana usa lápiz rosa, Beto escribe siempre con pluma negra y Diego usa lápiz azul. En la biblioteca, en el tercer estante, junto al libro verde, había una cajita con una galleta y otra nota: «Feliz cumpleaños, Mateo. Tu amigo secreto». Mateo sonrió: ya sabía quién era.",
+   p:[["¿Dónde encontró Mateo la nota?",["En su mochila","En su pupitre","En la biblioteca","En el patio"]],
+      ["¿Cómo era la letra de la nota?",["Redonda y rosa","Con pluma negra","Muy chiquita","Cuadrada y de lápiz azul"]],
+      ["¿En qué estante estaba la cajita?",["En el segundo","En el tercero","En el cuarto","En el primero"]],
+      ["¿Qué había en la cajita?",["Un dulce","Una galleta","Un lápiz","Un libro"]],
+      ["¿Quién escribió la nota?",["Ana","Beto","Diego","Mateo"]]] },
+ { t:"Caso 3: El fantasma del salón",
+   h:"En la escuela decían que un fantasma vivía en el salón de música. Una noche, la maestra Rosa oyó sonar el piano. Entró corriendo y vio una sábana blanca moviéndose junto a la ventana, que estaba abierta. Sobre el piano había migajas de pan y huellas pequeñas de gato. Al levantar la sábana apareció Bigotes, el gato del conserje, que había saltado sobre las teclas y se había enredado.",
+   p:[["¿Dónde decían que vivía el fantasma?",["En la biblioteca","En el patio","En la cocina","En el salón de música"]],
+      ["¿Qué fue lo que sonó?",["Una campana","El piano","Una flauta","Un tambor"]],
+      ["¿Qué se movía junto a la ventana?",["Una cortina roja","Un abrigo","Una sábana blanca","Una bufanda"]],
+      ["¿Qué había sobre el piano?",["Migajas de pan y huellas de gato","Papeles","Flores","Un sombrero"]],
+      ["¿Quién era el «fantasma»?",["Bigotes, el gato del conserje","La maestra Rosa","Un niño","Un perro"]]] },
+ { t:"Caso 4: El mapa del tesoro",
+   h:"Valeria y su hermano Pablo encontraron un mapa viejo en el ático. Decía que había que ir del columpio al árbol más grande, dar diez pasos hacia el norte y cruzar el puente de madera. Del otro lado había una roca con forma de tortuga. Debajo de la roca, cavando un poco, encontraron un cofre lleno de monedas de chocolate, y se las repartieron.",
+   p:[["¿Dónde encontraron el mapa?",["En el sótano","En el ático","En la cocina","En el garaje"]],
+      ["¿Cómo se llaman los hermanos?",["Lucía y Pablo","Valeria y Tomás","Sara y Pablo","Valeria y Pablo"]],
+      ["¿Qué tuvieron que cruzar?",["Un río","Un túnel","Una cerca","Un puente de madera"]],
+      ["¿Qué forma tenía la roca?",["De tortuga","De conejo","De estrella","De corazón"]],
+      ["¿Qué había en el cofre?",["Joyas","Libros","Monedas de chocolate","Llaves"]]] },
+ { t:"Caso 5: El dragón de la feria",
+   h:"En la feria del pueblo había un dragón verde de cartón de tres metros, pero alguien le había quitado la cola. Don Ramiro, su dueño, estaba muy triste. Camila notó pintura amarilla en el piso, cerca del puesto de algodón de azúcar, y siguió las manchas hasta la carpa del payaso. Ahí estaba la cola: el payaso la estaba pintando de dorado porque quería darle una sorpresa al dragón para el desfile de la noche. Don Ramiro se puso feliz y todos aplaudieron.",
+   p:[["¿De qué color era el dragón?",["Rojo","Azul","Verde","Negro"]],
+      ["¿Qué le faltaba al dragón?",["La cola","Una pata","Un ojo","Un ala"]],
+      ["¿De qué color era la pintura que notó Camila?",["Roja","Amarilla","Azul","Blanca"]],
+      ["¿Quién tenía la cola?",["Don Ramiro","Camila","El vendedor de algodón","El payaso"]],
+      ["¿Por qué se la llevó?",["Por una travesura","Para pintarla de dorado y dar una sorpresa","Para jugar","Porque estaba rota"]]] },
+ { t:"Caso 6: La carta sin firma",
+   h:"Una mañana, la maestra Elena encontró una carta sin firma sobre su escritorio. Decía: «Gracias por enseñarme a leer». Estaba escrita en papel azul claro y olía a fresas. En el sobre había una estampa de mariposa. La maestra recordó que solo Lucía ponía estampas de mariposa en sus cuadernos, y siempre con perfume de fresa. Al día siguiente, Lucía llegó con una gran sonrisa y la maestra le dijo: «De nada».",
+   p:[["¿Para quién era la carta?",["Para la maestra Elena","Para el director","Para Lucía","Para el conserje"]],
+      ["¿Qué decía la carta?",["Feliz cumpleaños","Gracias por enseñarme a leer","Perdón","Te invito a jugar"]],
+      ["¿De qué color era el papel?",["Rosa","Verde","Azul claro","Amarillo"]],
+      ["¿A qué olía la carta?",["A chocolate","A flores","A vainilla","A fresas"]],
+      ["¿Quién la escribió?",["Ana","El director","Lucía","Diego"]]] },
+];
+let casoActual = 0, mostrarSol = false, seleccion = [];
+function pintarCaso() {
+  const c = HISTORIAS[casoActual];
+  $("casoTitulo").textContent = c.t;
+  $("historia").textContent = c.h;
+  $("preguntas").innerHTML = "";
+  c.p.forEach(([q, ops], i) => {
+    const d = document.createElement("div"); d.className = "preg";
+    d.innerHTML = `<b>${i+1}. ${q}</b><div class="ops"></div>`;
+    ops.forEach((o, j) => {
+      const e = document.createElement("div");
+      e.className = "op" + (seleccion[i] === j ? " sel" : "") + (mostrarSol && CASOS[casoActual][i] === j ? " sol" : "");
+      e.textContent = LETRAS[j] + ") " + o;
+      e.onclick = () => { seleccion[i] = j; cajaUI.presionar("abcd"[j]); pintarCaso(); };
+      d.querySelector(".ops").append(e);
+    });
+    $("preguntas").append(d);
+  });
+}
+function irCaso(n) { casoActual = (n + HISTORIAS.length) % HISTORIAS.length; seleccion = []; pintarCaso(); }
+$("prevCaso").onclick = () => irCaso(casoActual - 1);
+$("sigCaso").onclick = () => irCaso(casoActual + 1);
+$("verSol").onclick = () => { mostrarSol = !mostrarSol; pintarCaso(); };
+$("limpiarSel").onclick = () => { seleccion = []; cajaUI.presionar("x"); pintarCaso(); };
+pintarCaso();
+
+nuevaCaja();
+log("Caja lista. Contraseña activa: " + txt(cajaUI.clave) + "   PIN maestro: " + txt(PIN_MAESTRO));
+log("Casos fijos: " + CASOS.map(txt).join(", "));
+</script>
+</body>
+</html>

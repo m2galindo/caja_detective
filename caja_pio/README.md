@@ -20,200 +20,134 @@
     pio run -t upload              # normal
     pio run -e uno_debug -t upload # con mensajes por serial
 
+## Contraseñas de la caja
+Se presiona la secuencia de 5 botones y luego ENVIAR.
+
+| Caso | Dificultad | Contraseña |
+|---|---|---|
+| La galleta que desapareció | Sencillo | B-A-D-B-C |
+| El paraguas amarillo | Medio | B-C-D-B-A |
+| El reloj de la plaza | Difícil | B-C-D-A-C |
+| Prueba | (quítala al terminar) | B-B-B-B-B |
+
+También abre la clave de fábrica **B-A-D-C-A**, hasta que el maestro guarde una propia.
+Los casos fijos están en `include/Config.h` (`CASES`). Con `USE_FIXED_CASES = false` solo abre la clave del maestro.
+
+## Modo profesor (cambiar la contraseña)
+El profesor puede guardar su propia contraseña directamente en la caja, sin computadora. En el código este modo se llama "modo maestro".
+
+**PIN del profesor: D-C-B-A** (se cambia en `MASTER_PIN`, `include/Config.h`).
+
+### Cómo entrar y cambiar la contraseña
+1. Mantén presionados **ENVIAR + BORRAR** a la vez durante **2 segundos**. Se encienden el LED rojo y el verde, y suenan 2 pitidos. Eso indica que estás en modo profesor.
+2. Teclea el PIN **D-C-B-A** (4 botones) y presiona **ENVIAR**. Un pitido medio confirma que el PIN es correcto.
+3. Teclea la **contraseña nueva** (5 respuestas) y presiona **ENVIAR**.
+4. Teclea **la misma contraseña otra vez** y presiona **ENVIAR**.
+5. Si coinciden, se enciende el LED verde por 1 segundo y suena el acierto. La contraseña queda guardada aunque se desconecte la placa.
+
+### Cosas útiles
+- **BORRAR** borra lo que llevas tecleado en el paso actual, sin salir del modo profesor.
+- Los LEDs de progreso muestran cuántos botones llevas presionados.
+- Si el PIN es incorrecto, las dos contraseñas no coinciden, o pasan **30 segundos** sin presionar nada, sale del modo profesor con el LED rojo y **no cambia nada**.
+- La caja guarda **una sola** contraseña del profesor. Si la cambia otra vez, reemplaza la anterior.
+- Las contraseñas fijas (los 3 casos, B-B-B-B-B y la de fábrica B-A-D-C-A) **siguen abriendo** la caja. Para que abra solo con la del profesor, pon `USE_FIXED_CASES = false` en `include/Config.h` y vuelve a subir el programa.
+- Se puede entrar al modo profesor con la caja cerrada o abierta, pero no durante el bloqueo de 30 segundos ni mientras muestra los aciertos tras un error.
+
 ## Historias y preguntas
+Cada caso tiene 5 preguntas de opción múltiple (A, B, C, D). La secuencia de respuestas correctas es la contraseña. Las respuestas correctas están en **negritas**.
 
-Cada caso tiene 5 preguntas de opción múltiple (A, B, C, D). La secuencia de respuestas correctas es la contraseña de ese caso. Las respuestas correctas están en **negritas**.
+### Caso 1 (sencillo): La galleta que desapareció
 
-El caso 7 (B-B-B-B-B) es solo de prueba y no tiene historia.
+**Contraseña:** B-A-D-B-C
 
-### Caso 1: El perro desaparecido
+Tomás puso una galleta en la mesa de la cocina. Cuando volvió, la galleta ya no estaba. Había migas en el piso que llegaban hasta el sillón. Debajo del sillón dormía Pelusa, el gato, con migas en el bigote. Tomás se rio y le dio un poco de leche.
 
-**Contraseña:** C-C-A-B-D
-
-Ayer por la tarde, Luna, la perra de Sofía, desapareció del jardín. Sofía vio que la reja estaba abierta y en el piso había huellas de patas pequeñas y un pedazo de salchicha. Las huellas llevaban al parque. Cerca de la banca, el vendedor de globos dijo: «Vi una perrita café con un listón rojo comiendo salchicha. Corrió hacia la panadería». En la panadería, la dueña contó que la perrita se escondió debajo de una mesa porque le asustó la tormenta. Sofía la encontró ahí, mojada y temblando, y la abrazó.
-
-1. ¿Cómo se llama la perra?
-   - A) Mocha
-   - B) Nube
-   - C) **Luna**
-   - D) Canela
-2. ¿Por dónde se escapó?
-   - A) Por la ventana
-   - B) Por el techo
-   - C) **Por la reja abierta**
-   - D) Por la puerta de la casa
-3. ¿Qué había en el piso, además de huellas?
-   - A) **Un pedazo de salchicha**
-   - B) Un hueso
-   - C) Un listón
-   - D) Un globo
-4. ¿Quién vio a la perrita en el parque?
-   - A) Un policía
-   - B) **El vendedor de globos**
-   - C) Una maestra
-   - D) El panadero
-5. ¿Dónde la encontró Sofía?
-   - A) En la banca del parque
+1. ¿Dónde puso Tomás la galleta?
+   - A) En el sillón
+   - B) **En la mesa de la cocina**
+   - C) En su mochila
+   - D) En el jardín
+2. ¿Qué había en el piso?
+   - A) **Migas**
+   - B) Agua
+   - C) Papeles
+   - D) Juguetes
+3. ¿Dónde dormía Pelusa?
+   - A) En la cama
    - B) En el jardín
-   - C) Junto a la reja
-   - D) **En la panadería**
+   - C) Sobre la mesa
+   - D) **Debajo del sillón**
+4. ¿Qué animal era Pelusa?
+   - A) Un perro
+   - B) **Un gato**
+   - C) Un conejo
+   - D) Un pájaro
+5. ¿Qué le dio Tomás al final?
+   - A) Una galleta
+   - B) Agua
+   - C) **Leche**
+   - D) Pan
 
-### Caso 2: La nota misteriosa
+### Caso 2 (medio): El paraguas amarillo
 
-**Contraseña:** A-D-B-B-C
+**Contraseña:** B-C-D-B-A
 
-Mateo encontró una nota doblada dentro de su mochila. Decía: «Búscame donde guardan los libros, en el tercer estante, junto al libro verde». La letra era cuadrada y estaba escrita con lápiz azul. Mateo pensó en sus compañeros: Ana usa lápiz rosa, Beto escribe siempre con pluma negra y Diego usa lápiz azul. En la biblioteca, en el tercer estante, junto al libro verde, había una cajita con una galleta y otra nota: «Feliz cumpleaños, Mateo. Tu amigo secreto». Mateo sonrió: ya sabía quién era.
+El lunes llovió toda la mañana. En la escuela, Camila no encontró su paraguas amarillo. Lo buscó en el pasillo, en el salón y en la dirección, pero no estaba. En el patio vio a Iván con un paraguas amarillo igual al suyo. Camila miró la manija: tenía una etiqueta con su nombre. Iván explicó que lo había tomado por error, porque su paraguas también era amarillo y lo había dejado en casa. Se disculpó y se lo devolvió. Como seguía lloviendo, compartieron el paraguas de Camila hasta la salida.
 
-1. ¿Dónde encontró Mateo la nota?
-   - A) **En su mochila**
-   - B) En su pupitre
-   - C) En la biblioteca
-   - D) En el patio
-2. ¿Cómo era la letra de la nota?
-   - A) Redonda y rosa
-   - B) Con pluma negra
-   - C) Muy chiquita
-   - D) **Cuadrada y de lápiz azul**
-3. ¿En qué estante estaba la cajita?
-   - A) En el segundo
-   - B) **En el tercero**
-   - C) En el cuarto
-   - D) En el primero
-4. ¿Qué había en la cajita?
-   - A) Un dulce
-   - B) **Una galleta**
-   - C) Un lápiz
-   - D) Un libro
-5. ¿Quién escribió la nota?
-   - A) Ana
-   - B) Beto
-   - C) **Diego**
-   - D) Mateo
+1. ¿Qué día llovió?
+   - A) Martes
+   - B) **Lunes**
+   - C) Viernes
+   - D) Domingo
+2. ¿De qué color era el paraguas de Camila?
+   - A) Azul
+   - B) Rojo
+   - C) **Amarillo**
+   - D) Verde
+3. ¿Cómo supo Camila que el paraguas era suyo?
+   - A) Por una mancha de pintura
+   - B) Por su tamaño
+   - C) Porque Iván se lo dijo
+   - D) **Por la etiqueta con su nombre en la manija**
+4. ¿Por qué tenía Iván el paraguas?
+   - A) Para molestarla
+   - B) **Lo tomó por error**
+   - C) Lo encontró en la calle
+   - D) Se lo prestó una maestra
+5. ¿Qué hicieron al final?
+   - A) **Compartieron el paraguas de Camila hasta la salida**
+   - B) Fueron a la dirección
+   - C) Se pelearon
+   - D) Esperaron a que parara de llover
 
-### Caso 3: El fantasma del salón
+### Caso 3 (difícil): El reloj de la plaza
 
-**Contraseña:** D-B-C-A-A
+**Contraseña:** B-C-D-A-C
 
-En la escuela decían que un fantasma vivía en el salón de música. Una noche, la maestra Rosa oyó sonar el piano. Entró corriendo y vio una sábana blanca moviéndose junto a la ventana, que estaba abierta. Sobre el piano había migajas de pan y huellas pequeñas de gato. Al levantar la sábana apareció Bigotes, el gato del conserje, que había saltado sobre las teclas y se había enredado.
+Cada mañana, el reloj de la plaza marcaba las ocho, aunque ya fuera mediodía. Los vecinos pensaban que estaba descompuesto y nadie lo arreglaba. Una tarde, Inés, una joven relojera recién llegada al pueblo, subió a revisarlo. Descubrió que las manecillas no estaban rotas: alguien las detenía a propósito con un alambre. Siguiendo unas huellas de aceite en la escalera, llegó a la casa de Don Fausto, un anciano que confesó que lo hacía porque a las ocho de la mañana, hacía cincuenta años, había conocido a su esposa en esa plaza, y le dolía que el tiempo siguiera avanzando. Inés no lo regañó. Le propuso instalar una campana que sonara a las ocho cada mañana en honor a ese recuerdo, y así el reloj volvió a funcionar. Desde entonces, cada día a las ocho, Don Fausto sonreía.
 
-1. ¿Dónde decían que vivía el fantasma?
-   - A) En la biblioteca
-   - B) En el patio
-   - C) En la cocina
-   - D) **En el salón de música**
-2. ¿Qué fue lo que sonó?
-   - A) Una campana
-   - B) **El piano**
-   - C) Una flauta
-   - D) Un tambor
-3. ¿Qué se movía junto a la ventana?
-   - A) Una cortina roja
-   - B) Un abrigo
-   - C) **Una sábana blanca**
-   - D) Una bufanda
-4. ¿Qué había sobre el piano?
-   - A) **Migajas de pan y huellas de gato**
-   - B) Papeles
-   - C) Flores
-   - D) Un sombrero
-5. ¿Quién era el «fantasma»?
-   - A) **Bigotes, el gato del conserje**
-   - B) La maestra Rosa
-   - C) Un niño
-   - D) Un perro
-
-### Caso 4: El mapa del tesoro
-
-**Contraseña:** B-D-D-A-C
-
-Valeria y su hermano Pablo encontraron un mapa viejo en el ático. Decía que había que ir del columpio al árbol más grande, dar diez pasos hacia el norte y cruzar el puente de madera. Del otro lado había una roca con forma de tortuga. Debajo de la roca, cavando un poco, encontraron un cofre lleno de monedas de chocolate, y se las repartieron.
-
-1. ¿Dónde encontraron el mapa?
-   - A) En el sótano
-   - B) **En el ático**
-   - C) En la cocina
-   - D) En el garaje
-2. ¿Cómo se llaman los hermanos?
-   - A) Lucía y Pablo
-   - B) Valeria y Tomás
-   - C) Sara y Pablo
-   - D) **Valeria y Pablo**
-3. ¿Qué tuvieron que cruzar?
-   - A) Un río
-   - B) Un túnel
-   - C) Una cerca
-   - D) **Un puente de madera**
-4. ¿Qué forma tenía la roca?
-   - A) **De tortuga**
-   - B) De conejo
-   - C) De estrella
-   - D) De corazón
-5. ¿Qué había en el cofre?
-   - A) Joyas
-   - B) Libros
-   - C) **Monedas de chocolate**
-   - D) Llaves
-
-### Caso 5: El dragón de la feria
-
-**Contraseña:** C-A-B-D-B
-
-En la feria del pueblo había un dragón verde de cartón de tres metros, pero alguien le había quitado la cola. Don Ramiro, su dueño, estaba muy triste. Camila notó pintura amarilla en el piso, cerca del puesto de algodón de azúcar, y siguió las manchas hasta la carpa del payaso. Ahí estaba la cola: el payaso la estaba pintando de dorado porque quería darle una sorpresa al dragón para el desfile de la noche. Don Ramiro se puso feliz y todos aplaudieron.
-
-1. ¿De qué color era el dragón?
-   - A) Rojo
-   - B) Azul
-   - C) **Verde**
-   - D) Negro
-2. ¿Qué le faltaba al dragón?
-   - A) **La cola**
-   - B) Una pata
-   - C) Un ojo
-   - D) Un ala
-3. ¿De qué color era la pintura que notó Camila?
-   - A) Roja
-   - B) **Amarilla**
-   - C) Azul
-   - D) Blanca
-4. ¿Quién tenía la cola?
-   - A) Don Ramiro
-   - B) Camila
-   - C) El vendedor de algodón
-   - D) **El payaso**
-5. ¿Por qué se la llevó?
-   - A) Por una travesura
-   - B) **Para pintarla de dorado y dar una sorpresa**
-   - C) Para jugar
-   - D) Porque estaba rota
-
-### Caso 6: La carta sin firma
-
-**Contraseña:** A-B-C-D-C
-
-Una mañana, la maestra Elena encontró una carta sin firma sobre su escritorio. Decía: «Gracias por enseñarme a leer». Estaba escrita en papel azul claro y olía a fresas. En el sobre había una estampa de mariposa. La maestra recordó que solo Lucía ponía estampas de mariposa en sus cuadernos, y siempre con perfume de fresa. Al día siguiente, Lucía llegó con una gran sonrisa y la maestra le dijo: «De nada».
-
-1. ¿Para quién era la carta?
-   - A) **Para la maestra Elena**
-   - B) Para el director
-   - C) Para Lucía
-   - D) Para el conserje
-2. ¿Qué decía la carta?
-   - A) Feliz cumpleaños
-   - B) **Gracias por enseñarme a leer**
-   - C) Perdón
-   - D) Te invito a jugar
-3. ¿De qué color era el papel?
-   - A) Rosa
-   - B) Verde
-   - C) **Azul claro**
-   - D) Amarillo
-4. ¿A qué olía la carta?
-   - A) A chocolate
-   - B) A flores
-   - C) A vainilla
-   - D) **A fresas**
-5. ¿Quién la escribió?
-   - A) Ana
-   - B) El director
-   - C) **Lucía**
-   - D) Diego
+1. ¿Por qué los vecinos no arreglaban el reloj?
+   - A) Porque no tenían dinero
+   - B) **Porque creían que estaba descompuesto y no conocían la verdadera causa**
+   - C) Porque a todos les gustaba así
+   - D) Porque nadie sabía subir
+2. ¿Qué descubrió Inés sobre las manecillas?
+   - A) Estaban rotas
+   - B) Les faltaban piezas
+   - C) **Alguien las detenía a propósito con un alambre**
+   - D) Estaban oxidadas
+3. ¿Cómo llegó Inés a la casa de Don Fausto?
+   - A) Preguntó a los vecinos
+   - B) Lo vio en la plaza
+   - C) Por una carta
+   - D) **Siguiendo las huellas de aceite de la escalera**
+4. ¿Por qué detenía Don Fausto el reloj?
+   - A) **Quería conservar el recuerdo de cuando conoció a su esposa y le dolía que pasara el tiempo**
+   - B) Odiaba el ruido
+   - C) Quería molestar a los vecinos
+   - D) Estaba cansado de la plaza
+5. ¿Qué describe mejor lo que hizo Inés?
+   - A) Lo castigó
+   - B) Lo ignoró
+   - C) **Encontró una solución que respetaba su recuerdo**
+   - D) Se lo contó a todo el pueblo

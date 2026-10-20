@@ -40,14 +40,11 @@ constexpr uint8_t FACTORY_KEY[Logic::KEY_LEN]  = {1, 0, 3, 2, 0};   // B-A-D-C-A
 
 // true = además de la clave del maestro se aceptan los casos fijos (modo casa).
 constexpr bool    USE_FIXED_CASES = true;
-constexpr uint8_t NUM_CASES       = 7;
+constexpr uint8_t NUM_CASES       = 4;
 constexpr uint8_t CASES[NUM_CASES][Logic::KEY_LEN] = {
-    {2, 2, 0, 1, 3},   // Caso 1: El perro desaparecido
-    {0, 3, 1, 1, 2},   // Caso 2: La nota misteriosa
-    {3, 1, 2, 0, 0},   // Caso 3: El fantasma del salón
-    {1, 3, 3, 0, 2},   // Caso 4: El mapa del tesoro
-    {2, 0, 1, 3, 1},   // Caso 5: El dragón de la feria
-    {0, 1, 2, 3, 2},   // Caso 6: La carta sin firma
-    {1, 1, 1, 1, 1},   // Caso 7: de prueba (B-B-B-B-B)
+    {1, 0, 3, 1, 2},   // Caso 1 (sencillo): La galleta que desapareció   B-A-D-B-C
+    {1, 2, 3, 1, 0},   // Caso 2 (medio):    El paraguas amarillo         B-C-D-B-A
+    {1, 2, 3, 0, 2},   // Caso 3 (difícil):  El reloj de la plaza         B-C-D-A-C
+    {1, 1, 1, 1, 1},   // Caso de prueba:    B-B-B-B-B (quítalo al terminar)
 };
 }  // namespace Settings

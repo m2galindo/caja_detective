@@ -60,45 +60,45 @@ Cada caso tiene 5 preguntas de opción múltiple (A, B, C, D). La secuencia de r
 
 **Contraseña:** B-A-D-B-C
 
-Tomás puso una galleta en la mesa de la cocina. Cuando volvió, la galleta ya no estaba. Había migas en el piso que llegaban hasta el sillón. Debajo del sillón dormía Pelusa, el gato, con migas en el bigote. Tomás se rio y le dio un poco de leche.
+Tomás llegó de la escuela con mucha hambre. Su mamá había horneado galletas de chocolate y le dejó una sobre la mesa de la cocina, con una nota que decía: «Cómetela después de hacer la tarea». Tomás subió a su cuarto y terminó la tarea de matemáticas en media hora. Cuando bajó, la galleta ya no estaba. En el piso había migas de chocolate que llegaban hasta la sala y se detenían junto al sillón. Tomás se agachó y debajo del sillón encontró a Pelusa, su gato gris, dormido con migas en el bigote. Tomás se rio y la acarició. Como ya había terminado la tarea, su mamá le sirvió un vaso de leche con otra galleta.
 
-1. ¿Dónde puso Tomás la galleta?
+1. ¿Dónde dejó la mamá la galleta?
    - A) En el sillón
    - B) **En la mesa de la cocina**
    - C) En su mochila
    - D) En el jardín
-2. ¿Qué había en el piso?
-   - A) **Migas**
-   - B) Agua
-   - C) Papeles
-   - D) Juguetes
-3. ¿Dónde dormía Pelusa?
-   - A) En la cama
-   - B) En el jardín
-   - C) Sobre la mesa
-   - D) **Debajo del sillón**
-4. ¿Qué animal era Pelusa?
-   - A) Un perro
-   - B) **Un gato**
-   - C) Un conejo
-   - D) Un pájaro
-5. ¿Qué le dio Tomás al final?
-   - A) Una galleta
-   - B) Agua
-   - C) **Leche**
-   - D) Pan
+2. ¿De qué eran las migas que había en el piso?
+   - A) **De chocolate**
+   - B) De pan
+   - C) De queso
+   - D) De fresa
+3. ¿Qué hizo Tomás antes de bajar a comer la galleta?
+   - A) Jugó con Pelusa
+   - B) Vio televisión
+   - C) Se durmió
+   - D) **Terminó la tarea de matemáticas**
+4. ¿Cómo era Pelusa?
+   - A) Un perro blanco
+   - B) **Un gato gris**
+   - C) Un conejo café
+   - D) Un gato negro
+5. ¿Qué le sirvió su mamá al final?
+   - A) Solo una galleta
+   - B) Un vaso de agua
+   - C) **Un vaso de leche con otra galleta**
+   - D) Pan con mantequilla
 
 ### Caso 2 (medio): El paraguas amarillo
 
 **Contraseña:** B-C-D-B-A
 
-El lunes llovió toda la mañana. En la escuela, Camila no encontró su paraguas amarillo. Lo buscó en el pasillo, en el salón y en la dirección, pero no estaba. En el patio vio a Iván con un paraguas amarillo igual al suyo. Camila miró la manija: tenía una etiqueta con su nombre. Iván explicó que lo había tomado por error, porque su paraguas también era amarillo y lo había dejado en casa. Se disculpó y se lo devolvió. Como seguía lloviendo, compartieron el paraguas de Camila hasta la salida.
+El lunes llovió toda la mañana. Camila llegó a la escuela con su paraguas amarillo, que tenía una manija de madera y una pequeña etiqueta con su nombre, y lo dejó en el perchero del pasillo. A la hora de la salida, el paraguas ya no estaba. Camila lo buscó en el pasillo, en el salón y en la dirección, pero nadie lo había visto. Su maestra, la señora Paty, le sugirió revisar el patio. Ahí vio a Iván caminando con un paraguas amarillo igual al suyo. Camila miró la manija: tenía una etiqueta con su nombre. Iván se puso rojo y explicó que lo había tomado por error, porque su paraguas también era amarillo y lo había dejado en casa. Se disculpó y se lo devolvió. Como seguía lloviendo mucho, compartieron el paraguas de Camila hasta la salida, y Camila lo invitó a jugar el miércoles.
 
-1. ¿Qué día llovió?
-   - A) Martes
-   - B) **Lunes**
-   - C) Viernes
-   - D) Domingo
+1. ¿Dónde dejó Camila su paraguas al llegar a la escuela?
+   - A) En su salón
+   - B) **En el perchero del pasillo**
+   - C) En la dirección
+   - D) En el patio
 2. ¿De qué color era el paraguas de Camila?
    - A) Azul
    - B) Rojo
@@ -113,7 +113,7 @@ El lunes llovió toda la mañana. En la escuela, Camila no encontró su paraguas
    - A) Para molestarla
    - B) **Lo tomó por error**
    - C) Lo encontró en la calle
-   - D) Se lo prestó una maestra
+   - D) Se lo prestó la maestra
 5. ¿Qué hicieron al final?
    - A) **Compartieron el paraguas de Camila hasta la salida**
    - B) Fueron a la dirección
@@ -124,13 +124,13 @@ El lunes llovió toda la mañana. En la escuela, Camila no encontró su paraguas
 
 **Contraseña:** B-C-D-A-C
 
-Cada mañana, el reloj de la plaza marcaba las ocho, aunque ya fuera mediodía. Los vecinos pensaban que estaba descompuesto y nadie lo arreglaba. Una tarde, Inés, una joven relojera recién llegada al pueblo, subió a revisarlo. Descubrió que las manecillas no estaban rotas: alguien las detenía a propósito con un alambre. Siguiendo unas huellas de aceite en la escalera, llegó a la casa de Don Fausto, un anciano que confesó que lo hacía porque a las ocho de la mañana, hacía cincuenta años, había conocido a su esposa en esa plaza, y le dolía que el tiempo siguiera avanzando. Inés no lo regañó. Le propuso instalar una campana que sonara a las ocho cada mañana en honor a ese recuerdo, y así el reloj volvió a funcionar. Desde entonces, cada día a las ocho, Don Fausto sonreía.
+Cada mañana, el reloj de la plaza marcaba las ocho, aunque ya fuera mediodía. Los vecinos pensaban que estaba descompuesto y, como llevaba años así, nadie se molestaba en arreglarlo; algunos incluso habían dejado de mirarlo. Una tarde, Inés, una joven relojera recién llegada al pueblo, subió a la torre a revisarlo. Descubrió que las manecillas no estaban rotas: alguien las detenía a propósito con un alambre fino. Además, en los escalones había huellas de aceite, como si alguien hubiera subido muchas veces con una aceitera en la mano. Siguiendo esas huellas, Inés llegó a la casa de Don Fausto, un anciano callado que vivía solo junto a la plaza. Don Fausto confesó que lo hacía porque a las ocho de la mañana, hacía cincuenta años, había conocido a su esposa en esa plaza, y le dolía que el tiempo siguiera avanzando después de ese momento. Inés no lo regañó ni avisó a nadie. Le propuso instalar una campana que sonara a las ocho cada mañana en honor a ese recuerdo, y a cambio el reloj volvería a marcar la hora real. Don Fausto aceptó con los ojos llenos de lágrimas. Desde entonces, cada día a las ocho suena la campana y el anciano sonríe desde su ventana.
 
 1. ¿Por qué los vecinos no arreglaban el reloj?
    - A) Porque no tenían dinero
-   - B) **Porque creían que estaba descompuesto y no conocían la verdadera causa**
+   - B) **Porque creían que estaba descompuesto desde hacía años y no conocían la verdadera causa**
    - C) Porque a todos les gustaba así
-   - D) Porque nadie sabía subir
+   - D) Porque nadie sabía subir a la torre
 2. ¿Qué descubrió Inés sobre las manecillas?
    - A) Estaban rotas
    - B) Les faltaban piezas

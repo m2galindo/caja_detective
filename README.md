@@ -16,6 +16,43 @@
 |Lic. Eduardo Salazar|
 |Rubén Vilchis M.|
  
+## Instrucciones de uso
+
+### Cómo se juega (alumnos)
+1. Lee la historia de la tarjeta y contesta las 5 preguntas.
+2. Presiona en la caja el botón de cada respuesta (**A, B, C o D**), en orden. Cada vez que presionas, suena un pitido corto y se enciende un LED amarillo de progreso (de 1 a 5).
+3. Si te equivocas de botón, presiona **BORRAR** para empezar de nuevo.
+4. Cuando hayas puesto las 5 respuestas, presiona **ENVIAR** y suéltalo.
+5. **Si todas son correctas**, la caja se abre: suenan 3 pitidos, se enciende el LED verde y el solenoide libera la tapa unos 5 segundos. Abre la tapa en ese momento.
+6. Para dejar la caja lista para el siguiente caso, presiona **ENVIAR** otra vez. Se apaga el LED verde y el solenoide vuelve a cerrar.
+
+### Si te equivocas
+- Suena un pitido largo y se enciende el LED **rojo** unos 3 segundos.
+- Los LEDs amarillos muestran **cuántas respuestas acertaste**, no cuáles. Vuelve a leer la historia y corrige.
+- Con **3 errores seguidos**, la caja se bloquea **30 segundos**: el LED rojo parpadea y los botones no responden. Pasado ese tiempo puedes volver a intentar.
+- Si presionas ENVIAR con menos de 5 respuestas, solo suena un pitido de error y no cuenta como intento fallido.
+
+### Qué significan los LEDs y los sonidos
+| Señal | Significado |
+|---|---|
+| LEDs amarillos (1 a 5) | Respuestas que llevas puestas. Tras un error, cuántas acertaste |
+| LED rojo fijo | Error. Se apaga solo |
+| LED rojo parpadeando | Caja bloqueada 30 segundos |
+| LED verde | Caja abierta. Se apaga al cerrarla con ENVIAR |
+| Rojo y verde juntos | Modo profesor activo |
+| Pitido corto | Botón de respuesta presionado |
+| Pitido largo | Error |
+| 3 pitidos (el último largo) | Acierto, la caja se abre |
+
+### Modo profesor
+El profesor puede cambiar la contraseña desde la caja. Los pasos están más abajo, en la sección "Modo profesor".
+
+### Si algo no funciona
+- **La caja no responde:** revisa que esté conectada a la corriente (USB o fuente) y que el LED de la placa esté encendido.
+- **Un botón no registra:** al presionarlo debe encenderse un LED amarillo y sonar un pitido. Si no, el botón o su cable están flojos.
+- **No abre aunque la clave es correcta:** suelta ENVIAR rápido (se revisa al soltarlo) y confirma que pusiste exactamente 5 respuestas.
+- **El solenoide no se mueve pero se oye el clic del relé:** revisa la fuente del solenoide y que sus cables estén en las terminales COM y NO del relé.
+
 ## Estructura
 - `include/Config.h`: pines y ajustes (único lugar a editar).
 - `include/Hardware.h`: agrupa botones, LEDs, buzzer, cerradura y EEPROM.
@@ -55,11 +92,11 @@ Los casos fijos están en `include/Config.h` (`CASES`). Con `USE_FIXED_CASES = f
 ## Modo profesor (cambiar la contraseña)
 El profesor puede guardar su propia contraseña directamente en la caja, sin computadora. En el código este modo se llama "modo maestro".
 
-**PIN del profesor: D-C-B-A** (se cambia en `MASTER_PIN`, `include/Config.h`).
+**PIN del profesor: B-B-B-B** (se cambia en `MASTER_PIN`, `include/Config.h`).
 
 ### Cómo entrar y cambiar la contraseña
 1. Mantén presionados **ENVIAR + BORRAR** a la vez durante **2 segundos**. Se encienden el LED rojo y el verde, y suenan 2 pitidos. Eso indica que estás en modo profesor.
-2. Teclea el PIN **D-C-B-A** (4 botones) y presiona **ENVIAR**. Un pitido medio confirma que el PIN es correcto.
+2. Teclea el PIN **B-B-B-B** (4 botones) y presiona **ENVIAR**. Un pitido medio confirma que el PIN es correcto.
 3. Teclea la **contraseña nueva** (5 respuestas) y presiona **ENVIAR**.
 4. Teclea **la misma contraseña otra vez** y presiona **ENVIAR**.
 5. Si coinciden, se enciende el LED verde por 1 segundo y suena el acierto. La contraseña queda guardada aunque se desconecte la placa.

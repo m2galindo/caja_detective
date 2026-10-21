@@ -1,4 +1,4 @@
-# Caja Detective (Arduino Uno + PlatformIO)
+# Caja Detective
 
 ## Estructura
 - `include/Config.h`: pines y ajustes (único lugar a editar).

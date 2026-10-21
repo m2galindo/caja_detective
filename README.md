@@ -18,15 +18,14 @@
  
 ## Estructura
 - `include/Config.h`: pines y ajustes (único lugar a editar).
-- `include/Hardware.h`: agrupa botones, LEDs, buzzer, cerradura y EEPROM.
-- `lib/`: un módulo por componente (`Button`, `Leds`, `Buzzer`, `Lock`, `KeyStore`) y `Logic` (lógica pura).
+- `include/Hardware.h`: agrupa botones, LEDs, cerradura y EEPROM.
+- `lib/`: un módulo por componente (`Button`, `Leds`, `Lock`, `KeyStore`) y `Logic` (lógica pura).
 - `src/Game.*`: máquina de estados del juego (sin `delay`). `src/main.cpp`: arranque.
 - `tools/`: pruebas de hardware. `test/`: pruebas unitarias en la PC.
 
 ## Pruebas de hardware (subir y abrir el monitor serial)
     pio run -e test_leds    -t upload && pio device monitor
     pio run -e test_buttons -t upload && pio device monitor
-    pio run -e test_buzzer  -t upload && pio device monitor
     pio run -e test_relay   -t upload && pio device monitor
 
 ## Pruebas en la PC (sin placa): lógica y juego completo (Game) con Arduino simulado
@@ -55,11 +54,11 @@ El profesor puede guardar su propia contraseña directamente en la caja, sin com
 **PIN del profesor: D-C-B-A** (se cambia en `MASTER_PIN`, `include/Config.h`).
 
 ### Cómo entrar y cambiar la contraseña
-1. Mantén presionados **ENVIAR + BORRAR** a la vez durante **2 segundos**. Se encienden el LED rojo y el verde, y suenan 2 pitidos. Eso indica que estás en modo profesor.
-2. Teclea el PIN **D-C-B-A** (4 botones) y presiona **ENVIAR**. Un pitido medio confirma que el PIN es correcto.
+1. Mantén presionados **ENVIAR + BORRAR** a la vez durante **2 segundos**. Se encienden el LED rojo y el verde. Eso indica que estás en modo profesor.
+2. Teclea el PIN **D-C-B-A** (4 botones) y presiona **ENVIAR**. El sistema confirma que el PIN es correcto.
 3. Teclea la **contraseña nueva** (5 respuestas) y presiona **ENVIAR**.
 4. Teclea **la misma contraseña otra vez** y presiona **ENVIAR**.
-5. Si coinciden, se enciende el LED verde por 1 segundo y suena el acierto. La contraseña queda guardada aunque se desconecte la placa.
+5. Si coinciden, se enciende el LED verde por 1 segundo. La contraseña queda guardada aunque se desconecte la placa.
 
 ### Cosas útiles
 - **BORRAR** borra lo que llevas tecleado en el paso actual, sin salir del modo profesor.

@@ -113,7 +113,23 @@ Cada caso tiene 5 preguntas de opción múltiple (A, B, C, D). La secuencia de r
 
 **Contraseña:** C-C-A-B-D
 
-Ayer por la tarde, Luna, la perra de Sofía, desapareció del jardín. Sofía vio que la reja estaba abierta y en el piso había huellas de patas pequeñas y un pedazo de salchicha. Las huellas llevaban al parque. Cerca de la banca, el vendedor de globos dijo: «Vi una perrita café con un listón rojo comiendo salchicha. Corrió hacia la panadería». En la panadería, la dueña contó que la perrita se escondió debajo de una mesa porque le asustó la tormenta. Sofía la encontró ahí, mojada y temblando, y la abrazó.
+Ayer, justo cuando el cielo empezaba a ponerse gris, Sofía salió al jardín a llamar a su perra para darle de cenar.
+
+—¡Luna! ¡Luna, ven, bonita! —gritó, pero nadie contestó.
+
+Corrió hacia el fondo del jardín y se le encogió el corazón: la reja estaba abierta de par en par. En el piso, sobre la tierra húmeda, había huellas de patas pequeñas y, a un lado, un pedazo de salchicha. «Alguien le dejó comida para que saliera», pensó Sofía. Las huellas seguían por la banqueta y llevaban directo al parque.
+
+Cerca de la banca, el vendedor de globos acomodaba su manojo de colores.
+
+—Disculpe, ¿no vio a una perrita? —preguntó Sofía con la voz temblorosa.
+
+—Sí, hace un rato —dijo el señor, rascándose la barbilla—. Era una perrita café con un listón rojo, y se iba comiendo una salchicha. Corrió hacia la panadería porque empezó a tronar.
+
+Sofía salió disparada. En la panadería olía a pan recién hecho, y la dueña le señaló una mesa del rincón.
+
+—Se metió ahí cuando cayó la tormenta —le contó—. Estaba muy asustada.
+
+Sofía se agachó y, debajo de la mesa, vio dos ojitos brillantes: Luna estaba mojada y temblando. Sofía la abrazó fuerte y por fin pudo sonreír.
 
 1. ¿Cómo se llama la perra?
    - A) Mocha
@@ -145,7 +161,17 @@ Ayer por la tarde, Luna, la perra de Sofía, desapareció del jardín. Sofía vi
 
 **Contraseña:** A-D-B-B-C
 
-Mateo encontró una nota doblada dentro de su mochila. Decía: «Búscame donde guardan los libros, en el tercer estante, junto al libro verde». La letra era cuadrada y estaba escrita con lápiz azul. Mateo pensó en sus compañeros: Ana usa lápiz rosa, Beto escribe siempre con pluma negra y Diego usa lápiz azul. En la biblioteca, en el tercer estante, junto al libro verde, había una cajita con una galleta y otra nota: «Feliz cumpleaños, Mateo. Tu amigo secreto». Mateo sonrió: ya sabía quién era.
+Esa mañana, Mateo abrió su mochila para sacar el cuaderno y encontró algo que no era suyo: una nota doblada en cuatro partes. La desdobló con cuidado y leyó en voz baja:
+
+«Búscame donde guardan los libros, en el tercer estante, junto al libro verde».
+
+Mateo miró a su alrededor, pero nadie lo estaba viendo. Se fijó en la letra: era cuadrada, firme, y estaba escrita con lápiz azul. «Esta letra la conozco de algún lado», pensó. Repasó mentalmente a sus compañeros: Ana siempre escribía con lápiz rosa, Beto no soltaba su pluma negra y Diego… Diego usaba lápiz azul, y su letra también era cuadrada.
+
+A la hora del recreo, Mateo se escabulló a la biblioteca. Contó los estantes con el dedo: uno, dos, tres. Ahí, justo junto al libro verde, había una cajita atada con un listón. La abrió despacio. Adentro había una galleta con forma de estrella y otra nota:
+
+«Feliz cumpleaños, Mateo. Tu amigo secreto».
+
+Mateo sonrió de oreja a oreja. Ya no tenía ninguna duda de quién había sido.
 
 1. ¿Dónde encontró Mateo la nota?
    - A) **En su mochila**
@@ -177,7 +203,17 @@ Mateo encontró una nota doblada dentro de su mochila. Decía: «Búscame donde 
 
 **Contraseña:** D-B-C-A-A
 
-En la escuela decían que un fantasma vivía en el salón de música. Una noche, la maestra Rosa oyó sonar el piano. Entró corriendo y vio una sábana blanca moviéndose junto a la ventana, que estaba abierta. Sobre el piano había migajas de pan y huellas pequeñas de gato. Al levantar la sábana apareció Bigotes, el gato del conserje, que había saltado sobre las teclas y se había enredado.
+En la escuela todos decían que un fantasma vivía en el salón de música. Los niños contaban que en las noches se oían ruidos raros y sombras extrañas. Nadie se atrevía a entrar después de las clases.
+
+Una noche, la maestra Rosa se quedó calificando exámenes. Ya era tarde y el edificio estaba en silencio cuando, de pronto, oyó un sonido que le erizó la piel: alguien estaba tocando el piano. No era una melodía, sino notas sueltas, tropezadas, como si alguien caminara sobre las teclas.
+
+La maestra Rosa tomó su linterna, respiró hondo y se acercó al salón de música. Empujó la puerta con cuidado.
+
+Junto a la ventana, que estaba abierta, una sábana blanca se movía de un lado a otro. «Será el viento», trató de convencerse, pero el viento no hace sonar un piano. Se acercó. Sobre el piano había migajas de pan y, entre ellas, unas huellas pequeñas, como de almohadillas.
+
+—Huellas de gato —murmuró.
+
+Con un solo tirón levantó la sábana. Debajo, enredado y muy asustado, apareció Bigotes, el gato del conserje, que había entrado por la ventana siguiendo el olor del pan y había saltado sobre las teclas. La maestra Rosa soltó una carcajada: el gran fantasma de la escuela tenía bigotes y cola.
 
 1. ¿Dónde decían que vivía el fantasma?
    - A) En la biblioteca
@@ -209,7 +245,21 @@ En la escuela decían que un fantasma vivía en el salón de música. Una noche,
 
 **Contraseña:** B-D-D-A-C
 
-Valeria y su hermano Pablo encontraron un mapa viejo en el ático. Decía que había que ir del columpio al árbol más grande, dar diez pasos hacia el norte y cruzar el puente de madera. Del otro lado había una roca con forma de tortuga. Debajo de la roca, cavando un poco, encontraron un cofre lleno de monedas de chocolate, y se las repartieron.
+Un sábado lluvioso, Valeria y su hermano Pablo subieron al ático de la casa de su abuela para buscar algo con qué entretenerse. Entre cajas de fotos y juguetes viejos, Pablo sacó un papel amarillento, doblado y lleno de polvo.
+
+—¡Mira! ¡Es un mapa! —gritó.
+
+Lo extendieron sobre el piso. Estaba dibujado con tinta café y tenía una equis roja en una esquina. Valeria leyó las instrucciones en voz alta:
+
+—«Del columpio, ve al árbol más grande. Da diez pasos hacia el norte y cruza el puente de madera. Del otro lado, busca la roca».
+
+Cuando dejó de llover, los hermanos corrieron al jardín. Empezaron en el columpio, caminaron hasta el árbol más grande y Pablo contó los pasos, moviendo los labios: «…ocho, nueve, diez». Luego cruzaron con cuidado el viejo puente de madera que chirriaba bajo sus pies.
+
+Del otro lado había una roca enorme, redonda y con una forma muy curiosa.
+
+—¡Parece una tortuga! —rió Pablo.
+
+Cavaron con las manos junto a la roca hasta que tocaron algo duro: era un cofre pequeño. Lo abrieron con el corazón latiéndoles fuerte y se quedaron callados un segundo. Estaba lleno de monedas de chocolate envueltas en papel dorado. Su abuela los miraba desde la ventana, riéndose. Los hermanos se las repartieron en partes iguales.
 
 1. ¿Dónde encontraron el mapa?
    - A) En el sótano
@@ -241,7 +291,21 @@ Valeria y su hermano Pablo encontraron un mapa viejo en el ático. Decía que ha
 
 **Contraseña:** C-A-B-D-B
 
-En la feria del pueblo había un dragón verde de cartón de tres metros, pero alguien le había quitado la cola. Don Ramiro, su dueño, estaba muy triste. Camila notó pintura amarilla en el piso, cerca del puesto de algodón de azúcar, y siguió las manchas hasta la carpa del payaso. Ahí estaba la cola: el payaso la estaba pintando de dorado porque quería darle una sorpresa al dragón para el desfile de la noche. Don Ramiro se puso feliz y todos aplaudieron.
+Todos los años, la feria del pueblo tenía una gran atracción: un dragón verde de cartón de tres metros de alto, con ojos grandes y una larga cola que se movía con el viento. Los niños hacían fila para tomarse fotos con él.
+
+Pero esa mañana, cuando la feria abrió, el dragón se veía extraño, como si le faltara algo. Don Ramiro, su dueño, dio una vuelta alrededor de él con las manos en la cabeza.
+
+—¡Mi dragón! ¡Le quitaron la cola! —exclamó, con los ojos llenos de lágrimas—. ¿Quién pudo hacer algo así?
+
+Camila, que estaba comiendo un manojo de papas fritas, dejó de masticar y se puso a pensar como detective. Miró el piso con mucha atención y, cerca del puesto de algodón de azúcar, descubrió una mancha de pintura amarilla. Un poco más allá, otra. Y otra más.
+
+—¡Son pistas! —susurró—. Una huella detrás de otra.
+
+Siguió las manchas entre los puestos, esquivando globos y charcos, hasta que llegó a la carpa del payaso. Se asomó por la tela y vio algo increíble: ahí estaba la cola del dragón, con el payaso dándole los últimos toques con una brocha. La estaba pintando de dorado.
+
+—No quería que nadie lo supiera —confesó el payaso, un poco apenado—. Era una sorpresa para el dragón, para el desfile de esta noche.
+
+Camila fue corriendo a contárselo a Don Ramiro, y el viejo se puso tan feliz que abrazó al payaso, a Camila y hasta a un señor que pasaba. Esa noche, todos aplaudieron al dragón de la cola dorada.
 
 1. ¿De qué color era el dragón?
    - A) Rojo
@@ -273,7 +337,17 @@ En la feria del pueblo había un dragón verde de cartón de tres metros, pero a
 
 **Contraseña:** A-B-C-D-C
 
-Una mañana, la maestra Elena encontró una carta sin firma sobre su escritorio. Decía: «Gracias por enseñarme a leer». Estaba escrita en papel azul claro y olía a fresas. En el sobre había una estampa de mariposa. La maestra recordó que solo Lucía ponía estampas de mariposa en sus cuadernos, y siempre con perfume de fresa. Al día siguiente, Lucía llegó con una gran sonrisa y la maestra le dijo: «De nada».
+Una mañana, la maestra Elena llegó temprano al salón, como cada día, y se encontró con una sorpresa sobre su escritorio: una carta sin nombre. Dentro del sobre, que tenía pegada una pequeña estampa de mariposa, había una hoja de papel azul claro. Al abrirla, un aroma dulce le llegó a la nariz: olía a fresas. La carta decía, con letra cuidadosa:
+
+«Gracias por enseñarme a leer».
+
+No tenía firma. La maestra Elena sonrió, pero la curiosidad le empezó a dar vueltas en la cabeza. «¿Quién habrá sido?», pensó.
+
+Empezó a recordar. ¿Ana? No, Ana siempre firmaba sus dibujos. ¿Diego? Diego jamás usaba papel de colores. Entonces se acordó de las libretas de sus alumnos y, de pronto, lo vio claro: solo una niña pegaba estampas de mariposa en sus cuadernos y, además, siempre las perfumaba con un poquito de fresa. Esa niña era Lucía.
+
+Al día siguiente, Lucía entró al salón con una sonrisa enorme, buscando la mirada de su maestra. La maestra Elena se agachó y le dijo bajito, para que solo ella lo oyera:
+
+—De nada.
 
 1. ¿Para quién era la carta?
    - A) **Para la maestra Elena**

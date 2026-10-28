@@ -1,5 +1,4 @@
 # Caja Detective
-
  
 ## Instrucciones de uso
 

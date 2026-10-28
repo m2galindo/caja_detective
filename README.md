@@ -1,20 +1,5 @@
 # Caja Detective
-# Tema: Letroescritura
 
-## Equipo 5 
-| Nombre | Matrícula |
-|--------|-----------|
-|José Adrian Rodarte Soto | A00844251|
-|Jesús Flores Martinez | A01286933|
-|Isabella Alvarez Cadena | A01572337|
-|Gerson Josue Ayala Membreño | A00845635|
-|Marco Alejandro Galindo de la Cruz | A00845553|
-|Jose Alfonso Cantu | A01285484|
-
-| Profesores  |
-|---------------------|
-|Lic. Eduardo Salazar|
-|Rubén Vilchis M.|
  
 ## Instrucciones de uso
 
